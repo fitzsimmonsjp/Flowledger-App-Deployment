@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xer-json-deployment
+spec:
+  replicas: 3  # Number of desired replicas
+  selector:
+    matchLabels:
+      app: xer-json
+  template:
+    metadata:
+      labels:
+        app: xer-json
+    spec:
+      containers:
+        - name: xer-json
+          image: docker.io/fitzsimmonsjp/xer-json:latest  # Replace with your Docker image path
+          ports:
+            - containerPort: 4057  # Replace with the port your Node.js app listens on
