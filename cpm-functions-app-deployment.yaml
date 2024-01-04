@@ -12,6 +12,9 @@ spec:
       labels:
         app: cpm-functions
     spec:
+      limits:
+        cpu: 500m
+        memory: 256Mi
       containers:
         - name: cpm-functions
           image: docker.io/fitzsimmonsjp/cpm-functions:latest  # Replace with your Docker image path
