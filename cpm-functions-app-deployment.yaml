@@ -13,7 +13,7 @@ spec:
         app: cpm-functions
     spec:
       limits:
-        cpu: 500m
+        cpu: 1000m
         memory: 256Mi
       containers:
         - name: cpm-functions
