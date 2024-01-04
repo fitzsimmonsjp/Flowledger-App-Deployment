@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpm-functions-deployment
+spec:
+  replicas: 3  # Number of desired replicas
+  selector:
+    matchLabels:
+      app: cpm-functions
+  template:
+    metadata:
+      labels:
+        app: cpm-functions
+    spec:
+      containers:
+        - name: cpm-functions
+          image: docker.io/fitzsimmonsjp/cpm-functions:latest  # Replace with your Docker image path
+          ports:
+            - containerPort: 4051  # Replace with the port your Node.js app listens on
