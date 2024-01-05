@@ -17,3 +17,36 @@ spec:
           image: docker.io/fitzsimmonsjp/xer-json:latest  # Replace with your Docker image path
           ports:
             - containerPort: 4057  # Replace with the port your Node.js app listens on
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xer-json-svc
+spec:
+  selector:
+    app: xer-json
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 4057
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xer-json-ingress
+  annotations:
+    networking.gke.io/managed-certificates: managed-cert
+spec:
+  ingressClassName: xer-json
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: xer-json-svc
+                port:
+                  number: 80
