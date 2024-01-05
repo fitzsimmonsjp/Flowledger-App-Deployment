@@ -17,3 +17,42 @@ spec:
           image: nginx:latest  # Replace with your Docker image path
           ports:
             - containerPort: 80  # Replace with the port your Node.js app listens on
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 80
+  type: NodePort
+---
+apiVersion: extensions/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: 34.107.60.241
+      http:
+        paths:
+        - path: /
+          backend:
+          serviceName: nginx-svc
+          servicePort: 80
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+spec:
+  domains:
+    - 34.107.60.241
+
