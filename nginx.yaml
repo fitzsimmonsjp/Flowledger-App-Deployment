@@ -32,7 +32,7 @@ spec:
       targetPort: 80
   type: NodePort
 ---
-apiVersion: extensions/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
@@ -44,9 +44,13 @@ spec:
       http:
         paths:
         - path: /
+          pathType: Prefix
           backend:
-          serviceName: nginx-svc
-          servicePort: 80
+            - service:
+                name: nginx-svc
+                port:
+                  number: 80
+
 ---
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
