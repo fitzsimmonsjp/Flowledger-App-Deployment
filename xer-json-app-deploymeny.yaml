@@ -37,7 +37,7 @@ kind: Ingress
 metadata:
   name: xer-json-ingress
   annotations:
-    networking.gke.io/managed-certificates: managed-cert
+    networking.gke.io/managed-certificates: flowledgerdev-cert
 spec:
   ingressClassName: xer-json
   rules:
@@ -50,3 +50,11 @@ spec:
                 name: xer-json-svc
                 port:
                   number: 80
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: flowledgerdev-cert
+spec:
+  domains:
+    - dev.flowledger.io
