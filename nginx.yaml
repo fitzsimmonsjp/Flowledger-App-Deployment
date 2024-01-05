@@ -40,8 +40,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: flowledgerdev.web.app
-      http:
+    - http:
         paths:
         - path: /
           pathType: Prefix
