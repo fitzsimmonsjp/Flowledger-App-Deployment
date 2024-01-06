@@ -70,4 +70,4 @@ metadata:
   name: managed-cert
 spec:
   domains:
-    - flowledger.io
+    - us-central1-flowledgerdev.cloudfunctions.net
