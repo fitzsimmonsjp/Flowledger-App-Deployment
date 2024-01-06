@@ -12,11 +12,24 @@ spec:
       labels:
         app: cpm-functions
     spec:
-      limits:
-        cpu: 1000m
-        memory: 256Mi
       containers:
         - name: cpm-functions
           image: docker.io/fitzsimmonsjp/cpm-functions:latest  # Replace with your Docker image path
           ports:
             - containerPort: 4051  # Replace with the port your Node.js app listens on
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cpm-functions-deployment
+  labels:
+    app: cpm-functions-svc
+spec:
+  selector:
+    app: cpm-functions
+    tier: web
+  ports:
+    - port: 80
+      targetPort: 4051
+  type: LoadBalancer
+  loadBalancerIP: 34.107.100.15
