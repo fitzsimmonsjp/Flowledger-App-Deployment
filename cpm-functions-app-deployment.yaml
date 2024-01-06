@@ -67,7 +67,7 @@ spec:
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  name: managed-cert
+  name: cpm-functions-cert
 spec:
   domains:
     - us-central1-flowledgerdev.cloudfunctions.net
