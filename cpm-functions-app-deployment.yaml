@@ -18,18 +18,47 @@ spec:
           ports:
             - containerPort: 4051  # Replace with the port your Node.js app listens on
 ---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: cpm-functions-deployment
+#  labels:
+#    app: cpm-functions-svc
+#spec:
+#  selector:
+#    app: cpm-functions
+#    tier: web
+#  ports:
+#    - port: 80
+#      targetPort: 4051
+#  type: LoadBalancer
+#  loadBalancerIP: 34.107.100.15
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cpm-functions-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: flowledgerdev-ip
+  labels:
+    app: cpm-functions
+spec:
+  defaultBackend:
+    service:
+      name: cpm-functions-backend
+      port:
+        number: 4051
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: cpm-functions-deployment
+  name: cpm-functions-backend
   labels:
-    app: cpm-functions-svc
+    app: cpm-functions
 spec:
+  type: NodePort
   selector:
     app: cpm-functions
     tier: web
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 4051
-  type: LoadBalancer
-  loadBalancerIP: 34.107.100.15
