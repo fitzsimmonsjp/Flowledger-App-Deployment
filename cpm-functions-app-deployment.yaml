@@ -39,6 +39,7 @@ metadata:
   name: cpm-functions-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: cpm-functions-ip
+    networking.gke.io/managed-certificates: managed-cert
   labels:
     app: cpm-functions
 spec:
@@ -62,3 +63,11 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+spec:
+  domains:
+    - flowledger.io
