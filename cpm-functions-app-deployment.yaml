@@ -38,7 +38,7 @@ kind: Ingress
 metadata:
   name: cpm-functions-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: flowledgerdev-ip
+    kubernetes.io/ingress.global-static-ip-name: cpm-functions-ip
   labels:
     app: cpm-functions
 spec:
